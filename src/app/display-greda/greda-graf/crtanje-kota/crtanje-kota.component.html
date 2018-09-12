@@ -1,0 +1,5 @@
+  <svg:g path *ngFor="let d of DrawingPath"  [d]="d"  stroke="black"
+  stroke-width="0.8" fill="none" />
+
+  <svg:g [attr.font-size]=12  font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+  <svg:text [attr.x]=DrawingText.x id="{{'kota_'+i}}" [attr.y]=DrawingText.y >{{DrawingText.text}}</svg:text>

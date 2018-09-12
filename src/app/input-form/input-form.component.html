@@ -1,0 +1,215 @@
+
+<div class="card">
+    <div class="card-header">
+      Definiši opterećenje
+    </div>
+    <div class="card-body">
+      <div class="opterecenje row no-gutters" >
+        <div *ngFor="let opterecenje of opterecenje" class="col-4">
+            <button class="btn btn-primary btn-block" #opt [class.active]="activeOpt==opt.innerText" (click)="setActiveOpt($event.target.textContent)"  [title]=opterecenje.disc>{{opterecenje.name}}</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body" *ngIf="opt.tipopt">
+            <h6><p>Intenzitet i položaj opterećenja</p></h6>
+            <!-- <p>{{opt | json}}</p> -->
+            <div *ngIf="isDuzinaVisibly; then withDuzina else withOutDuzina"></div>
+            <ng-template #withDuzina>
+              <form #f (ngSubmit)="addOpt(); f.reset()" >
+                <div class="input-group"  >
+                  <input 
+                        type="number" 
+                        name="sila" 
+                        required 
+                        #sila="ngModel" 
+                        [(ngModel)]="opt.sila" 
+                        class="form-control" 
+                        placeholder="int...">
+                  <span 
+                        class="input-group-addon" 
+                        id="basic-addon2">
+                        {{getJedMere(activeOpt)}}
+                      </span>
+                  <input 
+                        
+                        type="number" 
+                        name="polozopt" 
+                        required 
+                        #polozopt="ngModel" 
+                        [(ngModel)]="opt.polozopt" 
+                        class="form-control" 
+                        placeholder="od...">
+                  <input 
+  
+                        type="number" 
+                        name="duzopt" 
+                        required 
+                        #duzopt="ngModel" 
+                        [(ngModel)]="opt.duzopt" 
+                        class="form-control" 
+                        placeholder="do...">
+                  <span 
+                        class="input-group-addon" 
+                        id="basic-addon2">
+                        [m]
+                      </span>
+                  <span class="input-group-btn">
+                      <button class="btn btn-primary" [disabled]="validating(duzopt,polozopt,sila)" type="submit">+</button>
+                    </span>
+                </div>
+                <div class="alert alert-danger" *ngIf="sila.touched && sila.invalid">
+                  Intenzitet je neophodan.
+                </div>
+                <div class="alert alert-danger" *ngIf="polozopt.touched && polozopt.invalid">
+                  Položaj sile je neophodan.
+                </div>
+                <div class="alert alert-danger" *ngIf="polozopt.value < 0 || polozopt.value>kontGreda.raspon">
+                  Položaj opterecenja mora biti između 0 i {{kontGreda.raspon}} [m].
+                </div>
+                <div class="alert alert-danger" *ngIf="duzopt.touched && duzopt.invalid ">
+                  Dužina sile je neophodan.
+                </div>
+                <div class="alert alert-danger" *ngIf="duzopt.value+polozopt.value>kontGreda.raspon ">
+                  Opterećenje ne može delovati van grede.
+                </div>             
+            </form>    
+            </ng-template>
+            <ng-template #withOutDuzina>
+              <form #f (ngSubmit)="addOpt(); f.reset()" >
+                <div class="input-group"  >
+                  <input 
+                        type="number" 
+                        name="sila" 
+                        required 
+                        #sila="ngModel" 
+                        [(ngModel)]="opt.sila" 
+                        class="form-control" 
+                        placeholder="int...">
+                  <span 
+                        class="input-group-addon" 
+                        id="basic-addon2">
+                        {{getJedMere(activeOpt)}}
+                      </span>
+                  <input 
+                        
+                        type="number" 
+                        name="polozopt" 
+                        required 
+                        #polozopt="ngModel" 
+                        [(ngModel)]="opt.polozopt" 
+                        class="form-control" 
+                        placeholder="od...">
+                
+                  <span 
+                        class="input-group-addon" 
+                        id="basic-addon2">
+                        [m]
+                      </span>
+                  <span class="input-group-btn">
+                      <button class="btn btn-primary" [disabled]="validating(duzopt,polozopt,sila)" type="submit">+</button>
+                    </span>
+                </div>
+                <div class="alert alert-danger" *ngIf="sila.touched && sila.invalid">
+                  Intenzitet je neophodan.
+                </div>
+                <div class="alert alert-danger" *ngIf="polozopt.touched && polozopt.invalid">
+                  Položaj sile je neophodan.
+                </div>
+                <div class="alert alert-danger" *ngIf="polozopt.value < 0 || polozopt.value>kontGreda.raspon">
+                  Položaj opterecenja mora biti između 0 i {{kontGreda.raspon}} [m].
+                </div>
+               
+            </form>    
+            </ng-template>
+            
+            
+        </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th style="width:200px;">tip</th>
+                <th>intenzitet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let o of kontGreda.optercenja">
+                <td>
+                  <span (click)="removeOpt(o)" 
+                  class="btn btn-danger btn-circle">
+                  <i class="fa fa-times" aria-hidden="true">
+                    </i>
+                  </span>
+                </td>
+                <td class="test">{{o.tipopt}}</td>
+                <td>{{o.sila | jedMera:o.tipopt}}</td> 
+              </tr>
+            </tbody>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-primary">Izračunaj</a>
+    </div>
+  </div>
+  <!-- <form #f (ngSubmit)="addOpt(); f.reset()" >
+    <div class="input-group"  >
+      <input 
+            type="number" 
+            name="sila" 
+            required 
+            #sila="ngModel" 
+            [(ngModel)]="opt.sila" 
+            class="form-control" 
+            placeholder="int...">
+      <span 
+            class="input-group-addon" 
+            id="basic-addon2">
+            {{getJedMere(activeOpt)}}
+          </span>
+      <input 
+            
+            type="number" 
+            name="polozopt" 
+            required 
+            #polozopt="ngModel" 
+            [(ngModel)]="opt.polozopt" 
+            class="form-control" 
+            placeholder="od...">
+      <input 
+
+            [class.hidden]="activeOpt=='uprkoncsila' || activeOpt=='podzkoncsila' || activeOpt=='koncmoment'"
+            [value]="(activeOpt=='uprkoncsila' || activeOpt=='podzkoncsila' || activeOpt=='koncmoment') ? setDuzopt(polozopt):null"
+            type="number" 
+            name="duzopt" 
+            required 
+            #duzopt="ngModel" 
+            [(ngModel)]="opt.duzopt" 
+            class="form-control" 
+            placeholder="do...">
+      <span 
+            class="input-group-addon" 
+            id="basic-addon2">
+            [m]
+          </span>
+      <span class="input-group-btn">
+          <button class="btn btn-primary" [disabled]="validating(duzopt,polozopt,sila)" type="submit">+</button>
+        </span>
+    </div>
+    <div class="alert alert-danger" *ngIf="sila.touched && sila.invalid">
+      Intenzitet je neophodan.
+    </div>
+    <div class="alert alert-danger" *ngIf="polozopt.touched && polozopt.invalid">
+      Položaj sile je neophodan.
+    </div>
+    <div class="alert alert-danger" *ngIf="polozopt.value < 0 || polozopt.value>kontGreda.raspon">
+      Položaj opterecenja mora biti između 0 i {{ukupnaDuzGrede}} [m].
+    </div>
+    <div class="alert alert-danger" *ngIf="duzopt.touched && duzopt.invalid ">
+      Dužina sile je neophodan.
+    </div>
+    <div class="alert alert-danger" *ngIf="duzopt.value+polozopt.value>ukupnaDuzGrede ">
+      Opterećenje ne može delovati van grede.
+    </div>             
+</form>     -->

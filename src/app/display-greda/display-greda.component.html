@@ -1,0 +1,68 @@
+<div class="card">
+    <div class="card-header">
+      Kontinualna greda
+    </div>
+    <div class="card-body" >
+      <!-- //{{points}} -->
+      <div style="margin:0;" #myIdentifier>
+        <svg *ngIf="isSvgReady" 
+              width="100%" 
+              height="200" 
+              style="fill:rgba(94, 26, 26, 0.678)e;">
+
+
+            Sorry, your browser does not support inline SVG.  
+          <svg:g greda-graf 
+              [scale]=1 
+              [pX]=50 
+              [pY]=100 
+              [WorkingWidth]=svgWorkingWidth 
+              display="Dispozicija"
+              [kontGreda]="kontGreda"/>
+            </svg>
+
+        <svg *ngIf="isSvgReady && kontGreda.isResultOk && kontGreda.optercenja.length!=0" 
+              width="100%" 
+              height="200%" 
+              style="fill:rgba(94, 26, 26, 0.678)e;">
+
+          Sorry, your browser does not support inline SVG.  
+          <svg:g greda-graf id="svgM"
+                [scale]=1 
+                [pX]=50 
+                [pY]=100
+                [WorkingWidth]=svgWorkingWidth 
+                display="M"
+                [kontGreda]="kontGreda"/>
+        </svg>
+        <svg *ngIf="isSvgReady && kontGreda.isResultOk && kontGreda.optercenja.length!=0" 
+              width="100%" 
+              height="200" 
+              style="fill:rgba(94, 26, 26, 0.678)e;">
+
+            Sorry, your browser does not support inline SVG.  
+            <svg:g greda-graf id="svgT"
+                  [scale]=1 
+                  [pX]=50 
+                  [pY]=100
+                  [WorkingWidth]=svgWorkingWidth 
+                  display="T"
+                  [kontGreda]="kontGreda"/>
+          </svg>
+          <svg *ngIf="isSvgReady && kontGreda.isResultOk && kontGreda.optercenja.length!=0" 
+                width="100%" 
+                height="200" 
+                style="fill:rgba(94, 26, 26, 0.678)e;">
+
+              Sorry, your browser does not support inline SVG.  
+              <svg:g greda-graf id="svgN"
+                    [scale]=1 
+                    [pX]=50 
+                    [pY]=100
+                    [WorkingWidth]=svgWorkingWidth 
+                    display="N"
+                    [kontGreda]="kontGreda"/>
+            </svg>
+      </div>
+  </div>
+</div>

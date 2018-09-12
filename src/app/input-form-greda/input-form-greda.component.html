@@ -1,0 +1,61 @@
+<div class="row">
+      <div class="input-group col-xl-4 col-md-6 col-sm-12 col-12">
+        <span class="input-group-btn">
+            <button 
+                class="btn btn-primary" 
+                [disabled]="active<=1" 
+                (click)="preview()" 
+                type="button">
+                <i 
+                class="fa fa-arrow-left" 
+                aria-hidden="true">
+            </i>
+            </button>
+          </span>
+          <span 
+            class="input-group-addon test-active" 
+            id="basic-addon2">
+              L{{active}}
+            </span>
+        <input 
+            type="number" 
+            class="form-control test-active-raspon"  
+            [(ngModel)]="kontGreda.paramKontGreda.nizRaspona[active-1]" 
+            (keyup)="OnKonChange()">
+        <span 
+            class="input-group-addon" 
+            id="basic-addon2">
+            [m]
+        </span>
+        <span class="input-group-btn">
+            <button 
+                class="btn btn-primary" 
+                [disabled]="active==(kontGreda.paramKontGreda.brOslonca-1)" 
+                (click)="next()" 
+                type="button">
+              <i 
+              class="fa fa-arrow-right" 
+              aria-hidden="true">
+            </i>
+            </button>
+          </span>
+      </div>
+
+  <button 
+    (click)="addRaspon()" 
+    class="btn btn-primary btn-circle test-btn-add">
+    <i 
+    class="fa fa-plus" 
+    aria-hidden="true">     
+    </i>
+</button>
+  <button 
+    (click)="removeRaspon()" 
+    [disabled]="kontGreda.paramKontGreda.brOslonca<=2" 
+    class="btn btn-danger btn-circle test-btn-remove">
+    <i 
+    class="fa fa-minus" 
+    aria-hidden="true">
+    </i>
+</button>
+</div>

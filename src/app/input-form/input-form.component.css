@@ -1,0 +1,65 @@
+
+.card-header{
+    padding: 3px 20px 3px 20px;
+}
+
+.opterecenje button{
+    height: 70px;
+    width: 95px;
+    margin-bottom: 10px;
+    border-radius: 0;
+    background-color: green;
+    border: none;
+    box-shadow: 2px 2px 1px #888888;
+}
+.opterecenje button.active{
+    height: 70px;
+    width: 95px;
+    margin-bottom: 10px;
+    border-radius: 0;
+    background-color: rgb(19, 0, 128);
+    border: none;
+
+}
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+ }
+ .row.no-gutters > [class^="col-"],
+ .row.no-gutters > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+ }
+ .input-group{
+    padding-top: 5px;
+ }
+.btn-circle {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding: 3px 0;
+    font-size: 12px;
+    line-height: 0.71;
+    border-radius: 10px;
+  }
+  .card{
+      margin-bottom: 10px;
+  }
+.alert-danger{
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+.input-group-addon{
+    font-size: 12px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0; 
+}
+.hidden{
+    display: none;
+}

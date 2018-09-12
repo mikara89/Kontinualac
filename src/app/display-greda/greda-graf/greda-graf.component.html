@@ -1,0 +1,42 @@
+
+<svg:g nepok-oslonac-graf 
+    *ngFor="let o of greda.oslonci" 
+    [oznakaOslonca]="o.id"  
+    [isPokretan]="o.id!=0"  
+    [scale]=scale  
+    [pX]=o.x [pY]=o.y/>
+<svg:line 
+    [attr.x1]=greda.oslonci[0].x 
+    [attr.y1]=greda.oslonci[0].y 
+    [attr.x2]=greda.oslonci[this.greda.oslonci.length-1].x 
+    [attr.y2]=greda.oslonci[this.greda.oslonci.length-1].y 
+    style="stroke:rgb(0,0,0);stroke-width:1" />
+
+
+<div *ngIf="display=='Dispozicija'; then opt else mtn"></div>
+<ng-template #opt>
+        <svg:g crtanje-opt 
+        *ngFor="let o of this.kontGreda.optercenja" 
+        [opterecenje]="o"   
+        [scale]=scale  
+        [jm]=jm
+        [pX]=pX 
+        [pY]=pY/> 
+        <svg:g crtanje-kota 
+            *ngFor="let k of kote; let i = index" 
+            [i]=i
+            [jm]=jm
+            [startPoint]=k.ps 
+            [dimensions]=k.distanc/>
+</ng-template>
+<ng-template #mtn>
+        <svg:g crtanje-mtn  
+       
+        [kontGreda]=kontGreda 
+        [display]=display
+        [scale]=scale  
+        [jm]=jm
+        [pX]=pX 
+        [pY]=pY/> 
+</ng-template>
+<!-- *ngFor="let o of this.kontGreda.optercenja"  -->
