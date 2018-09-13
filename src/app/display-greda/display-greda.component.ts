@@ -37,7 +37,7 @@ export class DisplayGredaComponent implements OnInit {
 
           if(this.kontGreda.isResultOk) {
             this.removingMTNPath();
-            this.ngAfterViewInit();
+            // this.ngAfterViewInit();
           }
                 
     });
